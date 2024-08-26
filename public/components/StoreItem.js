@@ -20,7 +20,7 @@ export default class StoreItem extends Component {
 
         this.el.setAttribute('href', url);
         this.el.classList.add('restaurant');
-        this.el.style.backgroundImage = `url(${photoUrl})`;
+        this.el.style.backgroundImage = `url(${photoUrl || 'default-image.jpg'})`;
 
         this.el.innerHTML = /*html*/`
             <div class="info">

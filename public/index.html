@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-
     <!-- css 적용 -->
     <link rel="stylesheet" href="main.css">
     <style>
@@ -19,13 +18,15 @@
             height: 500px;
         }
     </style>
-    <!-- 카카오 지도 API 불러오기 -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=467371cdaf238ecaa4e21a4809dbd4bd"></script>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=467371cdaf238ecaa4e21a4809dbd4bd&libraries=LIBRARY"></script>
     <script type="module" defer src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
 </head>
 <body>
-    <div id="root"></div>        
+    <div id="root">
+        <div id="map"></div>
+    </div>        
+    
     
 </body>
 </html>

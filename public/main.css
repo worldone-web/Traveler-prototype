@@ -207,3 +207,56 @@ body {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
+
+
+.restaurant{
+    color: var(--colkor-white-50);
+    display:flex;
+    gap:70px;
+
+}
+
+.the-restaurant .map{
+    flex-shrink: 0;
+    --width: 200px;
+    width: var(--width); 
+    height: calc(var(--width)*3/2);
+    border-radius: 10px;
+    background-size: cover;
+    background-color: var(--color-area);
+}
+
+.the-restaurant .specs{
+    flex-grow:1;
+}
+
+.the-restaurant .title{
+    font-size: 70px;
+    font-family: "Oswald",sans-serif;
+    line-height: 1;
+    color: var(--color-white);
+    margin-bottom: 30px;
+}
+
+.the-restaurant .title.skeleton{
+    height: 70px;
+}
+
+.the-restaurant .labels{
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+.the-restaurant .labels.skeleton{
+    height: 30px;
+}
+.the-restaurant .plot.skeleton{
+    width:80%;
+    height: 400px;
+}
+
+.the-restaurant h3{
+    font-size: 20px;
+    font-family: "Oswald", sans-serif;
+    color: var(--color-white);
+    margin: 24px 0 6px;
+}

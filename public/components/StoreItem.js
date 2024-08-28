@@ -18,7 +18,12 @@ export default class StoreItem extends Component {
 
         const { name, address, url, photoUrl } = store;
 
-        this.el.setAttribute('href', url);
+        // 쿼리와 analyze_type 파라미터를 설정
+        const query = encodeURIComponent(name); // 가게 이름을 query로 사용
+        const analyzeType = 'exact'; // 정확한 매칭을 원할 경우
+  
+        // 클릭 시 페이지 이동을 방지하고 SPA 라우팅 사용
+        this.el.setAttribute('href', `#/restaurant?query=${query}&analyze_type=${analyzeType}`);
         this.el.classList.add('restaurant');
         this.el.style.backgroundImage = `url(${photoUrl || 'default-image.jpg'})`;
 

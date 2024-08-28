@@ -14,6 +14,7 @@ export class Component {
     render() { // 컴포넌트를 렌더링하는 함수
       // ...
     }
+    
   }
   
   
@@ -38,9 +39,15 @@ export class Component {
     history.replaceState(query, '') // (상태, 제목)
   
     // 2) 현재 라우트 정보를 찾아서 렌더링!
-    const currentRoute = routes.find(route => new RegExp(`${route.path}/?$`).test(hash))
-    routerView.innerHTML = ''
-    routerView.append(new currentRoute.component().el)
+    const currentRoute = routes.find(route => new RegExp(`^${route.path}/?$`).test(hash));
+
+    if (currentRoute && currentRoute.component) {
+        routerView.innerHTML = '';
+        routerView.append(new currentRoute.component().el);
+    } else {
+        console.error(`No component found for path: ${hash}`);
+        routerView.innerHTML = '<p>페이지를 찾을 수 없습니다.</p>';
+    }
   
     // 3) 화면 출력 후 스크롤 위치 복구!
     window.scrollTo(0, 0)

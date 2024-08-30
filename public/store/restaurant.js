@@ -50,7 +50,7 @@ export const searchRestaurantStores = async (query, page = 1) => {
 export const searchRestaurantStores = async (query, page = 1) => {
     try {
         store.state.loading = true;
-        store.state.page=1;
+        store.state.page=page;
         if(page==1){
             store.state.restaurants=[]
         }
@@ -60,13 +60,16 @@ export const searchRestaurantStores = async (query, page = 1) => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
 
-        const {documents} = await response.json();
+        const {documents, meta} = await response.json();
         console.log('/api/search:', JSON.stringify(documents, null, 2)); // 디버깅 로그  
         //documents로 받음
         store.state.restaurants=[
             ...store.state.restaurants,
             ...documents
         ]
+
+        store.state.pageMax = meta ? Math.ceil(Number(meta.pageable_count) / 15 ) : 1;
+        console.log("pageMax:",store.state.pageMax)
 
 
         /*

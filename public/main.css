@@ -37,11 +37,6 @@ body {
     }
 }
 
-.map{
-    width:500px;
-    height:400px;
-}
-
 .btn{
     height: 50px;
     padding: 0 20px;
@@ -216,7 +211,7 @@ body {
 
 }
 
-.the-restaurant .map{
+.the-restaurant #map {
     flex-shrink: 0;
     --width: 200px;
     width: var(--width); 
@@ -224,7 +219,9 @@ body {
     border-radius: 10px;
     background-size: cover;
     background-color: var(--color-area);
+    margin-bottom: 30px;
 }
+
 
 .the-restaurant .specs{
     flex-grow:1;

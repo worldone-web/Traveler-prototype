@@ -68,28 +68,10 @@ export const searchRestaurantStores = async (query, page = 1) => {
             ...documents
         ]
 
+        //kakao RESTAPI한계상 문서노출 45개가 한계 - 최대 페이지 3개
         store.state.pageMax = meta ? Math.ceil(Number(meta.pageable_count) / 15 ) : 1;
-        console.log("pageMax:",store.state.pageMax)
 
 
-        /*
-        if (data.documents && Array.isArray(data.documents)) {
-            store.state.restaurants = data.documents.map(place => ({
-                name: place.place_name || 'Unknown Place',
-                address: place.road_address_name || place.address_name || 'No address provided',
-                url: place.place_url || '#',
-                category: place.category_name || 'No category',
-                phone: place.phone || 'No phone number',
-                photoUrl: place.image_url || 'default-image.jpg'
-            }));
-            
-            store.state.page = page;
-            store.state.pageMax = data.meta ? Math.ceil(data.meta.total_count / 20) : 1;
-        } else {
-            console.error('유효한 검색 결과가 없습니다.');
-            store.state.restaurants = [];
-        }
-        */
     } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
         store.state.restaurants = [];
@@ -115,8 +97,9 @@ export const getRestaurantDetails = async (query, analyzeType = 'exact') => {
         if (data && typeof data === 'object') {
             store.state.restaurant = {
                 name: data.place_name || 'Unknown Place',
-                address: data.road_address_name || data.address_name || 'No address provided',
-                url: data.place_url || '#',
+                address: data.address_name || 'No address provided',
+                road_address: data.road_address_name || 'No address provided',
+                page_url: data.place_url || '#',
                 category: data.category_name || 'No category',
                 phone: data.phone || 'No phone number',
                 photoUrl: data.image_url || 'default-image.jpg',

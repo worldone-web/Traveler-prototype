@@ -25,18 +25,26 @@ export default class Restaurant extends Component {
             this.el.innerHTML = /* html */ `
                 <div id="map" style="width: 100%; height: 400px;"></div>
                 <div class="specs">
-                    <div class="title">${restaurant.name || 'Unknown Place'}</div>
+                    <div class="title">
+                        ${restaurant.name || 'Unknown Place'}
+                    </div>
                     <div>
                         <h3>Location</h3>
-                        ${restaurant.address || 'No address provided'}
+                        <span>${restaurant.address || 'No address provided'}</span>
+                        &nbsp;/&nbsp;
+                        <span>${restaurant.road_address || 'No address provided'}</span>
                     </div>
                     <div>
                         <h3>Phone Number</h3>
-                        ${restaurant.phone || 'No phone number'}
+                        <p>${restaurant.phone || 'No phone number'}</p>
                     </div>
                     <div>
                         <h3>Rating</h3>
-                        ${restaurant.rating || 'N/A'}
+                        <p>${restaurant.rating || 'N/A'}</p>
+                    </div>
+                    <div>
+                        <h3>URL</h3>
+                        <a href="${restaurant.page_url}" target="_blank">${restaurant.name} 상세 정보</a>
                     </div>
                 </div>
             `;

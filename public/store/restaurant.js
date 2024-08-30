@@ -10,7 +10,7 @@ const store = new Store({
 });
 
 export default store;
-
+/*
 export const searchRestaurantStores = async (query, page = 1) => {
     try {
         store.state.loading = true;
@@ -38,6 +38,55 @@ export const searchRestaurantStores = async (query, page = 1) => {
             console.error('유효한 검색 결과가 없습니다.');
             store.state.restaurants = [];
         }
+    } catch (error) {
+        console.error('데이터를 가져오는 중 오류 발생:', error);
+        store.state.restaurants = [];
+    } finally {
+        store.state.loading = false;
+    }
+};
+*/
+
+export const searchRestaurantStores = async (query, page = 1) => {
+    try {
+        store.state.loading = true;
+        store.state.page=1;
+        if(page==1){
+            store.state.restaurants=[]
+        }
+        const response = await fetch(`/api/places?query=${encodeURIComponent(query)}&page=${page}`);
+        
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+
+        const {documents} = await response.json();
+        console.log('/api/search:', JSON.stringify(documents, null, 2)); // 디버깅 로그  
+        //documents로 받음
+        store.state.restaurants=[
+            ...store.state.restaurants,
+            ...documents
+        ]
+
+
+        /*
+        if (data.documents && Array.isArray(data.documents)) {
+            store.state.restaurants = data.documents.map(place => ({
+                name: place.place_name || 'Unknown Place',
+                address: place.road_address_name || place.address_name || 'No address provided',
+                url: place.place_url || '#',
+                category: place.category_name || 'No category',
+                phone: place.phone || 'No phone number',
+                photoUrl: place.image_url || 'default-image.jpg'
+            }));
+            
+            store.state.page = page;
+            store.state.pageMax = data.meta ? Math.ceil(data.meta.total_count / 20) : 1;
+        } else {
+            console.error('유효한 검색 결과가 없습니다.');
+            store.state.restaurants = [];
+        }
+        */
     } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
         store.state.restaurants = [];
@@ -93,7 +142,7 @@ export const getWalkingRoute = async (startX, startY, endX, endY) => {
 
         const data = await response.json();
 
-        console.log('/api/route:', JSON.stringify(data, null, 2)); // 디버깅 로그
+        //console.log('/api/route:', JSON.stringify(data, null, 2)); // 디버깅 로그
         return data;
     } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
